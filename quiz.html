@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <video autoplay muted loop id="background-video">
+        <source src="media/background.mp4" type="video/mp4">
+    </video>
+
+    <nav id="sidebar">
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="renewables.html">⚡ Energie Rinnovabili</a></li>
+            <li><a href="game.html">🎮 Gioco</a></li>
+            <li><a href="quiz.html">❓ Quiz</a></li>
+        </ul>
+    </nav>
+
+    <div id="content">
+        <h1>Quiz sul Cambiamento Climatico</h1>
+        <form id="quiz-form">
+            <div class="question">
+                <h3>1. Qual è la principale causa del cambiamento climatico?</h3>
+                <label><input type="radio" name="q1" value="a"> A) Deforestazione</label><br>
+                <label><input type="radio" name="q1" value="b"> B) Uso di combustibili fossili</label><br>
+                <label><input type="radio" name="q1" value="c"> C) Inquinamento dell'acqua</label><br>
+                <label><input type="radio" name="q1" value="d"> D) Attività vulcanica</label>
+            </div>
+
+            <div class="question">
+                <h3>2. Qual è il gas serra più abbondante nell'atmosfera?</h3>
+                <label><input type="radio" name="q2" value="a"> A) Anidride carbonica (CO₂)</label><br>
+                <label><input type="radio" name="q2" value="b"> B) Metano (CH₄)</label><br>
+                <label><input type="radio" name="q2" value="c"> C) Protossido di azoto (N₂O)</label><br>
+                <label><input type="radio" name="q2" value="d"> D) Ozono (O₃)</label>
+            </div>
+
+            <div class="question">
+                <h3>3. Quale di queste è una fonte di energia rinnovabile?</h3>
+                <label><input type="radio" name="q3" value="a"> A) Carbone</label><br>
+                <label><input type="radio" name="q3" value="b"> B) Gas naturale</label><br>
+                <label><input type="radio" name="q3" value="c"> C) Energia solare</label><br>
+                <label><input type="radio" name="q3" value="d"> D) Petrolio</label>
+            </div>
+
+            <button type="submit">Invia Risposte</button>
+        </form>
+
+        <div id="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        document.getElementById('quiz-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let score = 0;
+            const answers = {
+                q1: 'b',
+                q2: 'a',
+                q3: 'c'
+            };
+
+            for (let question in answers) {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected && selected.value === answers[question]) {
+                    score++;
+                }
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Hai ottenuto ${score} su ${Object.keys(answers).length} domande corrette!`;
+        });
+    </script>
+
+</body>
+</html>
